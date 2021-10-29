@@ -41,6 +41,7 @@ a{
     max-width: 170rem;
     padding: 0 1.5rem;
     margin: 0 auto;
+    height: auto;
 }
 
 .inner-container{
@@ -49,18 +50,22 @@ a{
     padding: 0 1.5rem;
     margin: 0 auto;
     overflow: hidden;
+    height: auto;
 }
 
 /*Nav Bar*/
 .header{
     width: 100%;
+    position: relative;
 }
 
 .nav{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 10rem;
+    z-index: 1000;   
 }
 
 .nav-list{
@@ -85,11 +90,18 @@ a{
     text-transform: uppercase;
     font-weight: 700;
 }
+
+/*Mobile*/
+.hamburger{
+    display: none;
+}
+
+.mobile-nav{
+    opacity: 0;
+    transform: scale(0);
+    display: none;
+}
 /*Fin nav bar*/
-
-/*Hamburger menu*/
-
-/*Fin hamburger menu*/
 
 /*Hero*/
 .hero{
@@ -113,7 +125,7 @@ a{
 }
 
 .phrase{
-    font-size: clamp(1.6rem, 6vw, 6rem);
+    font-size: clamp(1.6rem, 6vw, 8rem);
     font-weight: 700;
     line-height: 100%;
     margin: 1rem 0;
@@ -132,21 +144,20 @@ a{
 .cta{
     font-size: clamp(1.6rem, 6vw, 2.5rem);
     color: var(--blanco);
-    border: solid 2px var(--azulMalibu);
     border-radius: 50px;
     padding: 10px 15px;
     background-color: var(--azulMalibu);
-    margin: 2rem 0 10rem 0;
+    margin: 2rem 0  0;
     font-weight: 600;
 }
 
+
 .img-hero{
-    width: clamp(300px, 20vw, 600px);
+    width: clamp(300px, 20vw, 700px);
 }
 /*Fin hero*/
 
 /*Main*/
-
 /*Icons*/
 .icons-title{
     font-size: clamp(1.6rem, 6vw, 5rem);
@@ -255,7 +266,7 @@ a{
 }
 
 .opinion-txt{
-    background-color: var(--blanco);
+    background-color: #d1d1d1;
     width: 20%;
     height: 35rem;
     margin: 5rem 0;
@@ -291,3 +302,86 @@ a{
 }
 /*Fin bottom*/
 /*Fin main*/
+
+
+/*Media query*/
+
+@media only screen and (max-width: 992px) {
+    /*Hamburger menu*/
+    .hamburger{
+        position: fixed;
+        display: block;
+        width: 30px;
+        cursor: pointer;
+        appearance: none;
+        background: none;
+        outline: none;
+        border: none;
+        z-index: 100;
+        right: 2%;
+    }
+
+    .hamburger .bar, .hamburger::before{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #000000;
+        margin: 6px 0px;
+        transition: 0.4s;
+    }
+
+    .hamburger.is-active::before{
+        transform: rotate(45deg) translate(0px, 5px);
+        height: 2px;
+    }
+
+    .hamburger.is-active .bar{
+        transform: rotate(-45deg) translate(0px, -5px);
+        height: 2px;
+    }
+
+    /*Nav items*/
+    .nav-list{
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    .mobile-nav{
+        display: block;
+        opacity: 1;
+        transform: scale(1);
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 100vw;
+        min-height: 100vh;
+        z-index: 98;
+        background-color: var(--amarilloDande);
+        transition: 0.4s;
+    }
+
+    .nav-list-mob{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-item-mob:not(:last-child){
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .nav-link-mob{
+        font-size: clamp(3rem, 4vw, 4rem);
+        color: var(--negroMoonless);
+    }
+
+    .mobile-nav.is-active{
+        left: 0;
+    }
+
+}
